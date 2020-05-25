@@ -30,11 +30,34 @@ public class EstudianteDAOImpl implements EstudianteDAO {
 		
 		return estudiantes;
 	}
-
-	@Transactional
+	
 	@Override
-	public void insert(Estudiante e) throws DataAccessException {
+	public Estudiante findOne(Integer code) throws DataAccessException {
 		// TODO Auto-generated method stub
-		entityManager.persist(e);
+		Estudiante estudiante = entityManager.find(Estudiante.class, code);
+        return estudiante;
+	}
+
+	@Override
+	@Transactional
+	public void save(Estudiante estudiante) throws DataAccessException {
+		// TODO Auto-generated method stub
+		try {
+			if (estudiante.getCodigoEstudiante() == null) entityManager.persist(estudiante);
+	        else{
+	        	entityManager.merge(estudiante);
+	        	entityManager.flush();
+	        }
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	@Transactional
+	public void delete(Integer code) throws DataAccessException {
+		// TODO Auto-generated method stub
+		Estudiante estudiante = entityManager.find(Estudiante.class, code);
+		entityManager.remove(estudiante);
 	}
 }

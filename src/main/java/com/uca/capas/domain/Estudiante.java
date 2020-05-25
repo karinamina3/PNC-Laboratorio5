@@ -16,7 +16,7 @@ public class Estudiante {
 
 	@Id
 	@Column(name = "c_usuario")
-	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigoEstudiante;
 	
 	@Column(name = "nombre")
@@ -32,7 +32,7 @@ public class Estudiante {
 	@Column(name = "carne")
 	@Size(message = "El carnet no debe tener mas de 10 caracteres", max = 10)
 	@NotEmpty(message = "Este campo no puede estar vacio")
-	@Pattern(regexp="([0-9]*)$", message = "El carnet solo debe contener numeros")
+	@Pattern(regexp = "([0-9]*)$", message = "El carnet solo debe contener numeros")
 	private String carnet;
 	
 	@Column(name = "carrera")
